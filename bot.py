@@ -13,9 +13,8 @@ bot = Bot(os.getenv("TELEGRAM_TOKEN"))
 dp = Dispatcher()
 
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
-CREDS = json.loads(
-    base64.b64decode(os.getenv("GOOGLE_CREDS_JSON_BASE64")).decode("utf-8")
-)
+with open("google_creds.json", "r") as f:
+    CREDS = json.load(f)
 
 agcm = gspread_asyncio.AsyncioGspreadClientManager(
     lambda: Credentials.from_service_account_info(
