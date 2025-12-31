@@ -1,3 +1,5 @@
+import base64
+
 import asyncio, os, json
 from datetime import datetime
 from aiogram import Bot, Dispatcher, types
@@ -11,7 +13,9 @@ bot = Bot(os.getenv("TELEGRAM_TOKEN"))
 dp = Dispatcher()
 
 SPREADSHEET_ID = os.getenv("SPREADSHEET_ID")
-CREDS = json.loads(os.getenv("GOOGLE_CREDS_JSON").replace("\\n", "\n"))
+CREDS = json.loads(
+    base64.b64decode(os.getenv("GOOGLE_CREDS_JSON_BASE64")).decode("utf-8")
+)
 
 agcm = gspread_asyncio.AsyncioGspreadClientManager(
     lambda: Credentials.from_service_account_info(
