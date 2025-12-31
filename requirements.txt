@@ -1,0 +1,5 @@
+aiogram
+gspread
+gspread-asyncio
+python-dotenv
+google-auth
